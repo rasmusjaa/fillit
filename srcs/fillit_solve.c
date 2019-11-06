@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 12:29:05 by npimenof          #+#    #+#             */
-/*   Updated: 2019/11/06 13:30:21 by npimenof         ###   ########.fr       */
+/*   Updated: 2019/11/06 17:01:49 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,12 @@ char			*solve(int blocs, t_bloc *start)
 
 	min = ft_sqrt(blocs * 4);
 	max = blocs * 4;
-	while (min < max)
+	while (min <= max)
 	{
 		grid = new_grid(min);
 		if (put_bloc(grid, start->next, min) == 0)
 			return (grid);
+		ft_putendl(grid);
 		free(grid);
 		grid = NULL;
 		min++;

@@ -6,11 +6,17 @@
 /*   By: npimenof <npimenof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 12:07:05 by npimenof          #+#    #+#             */
-/*   Updated: 2019/11/06 13:30:25 by npimenof         ###   ########.fr       */
+/*   Updated: 2019/11/06 17:32:56 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+static void		exits(void)
+{
+	ft_putendl("error");
+	exit(1);
+}
 
 static void		bloc_origo(t_bloc *elem)
 {
@@ -34,6 +40,10 @@ static void		bloc_origo(t_bloc *elem)
 		(elem->y)[i] = (elem->y)[i] - (elem->origo_xy)[1];
 		i++;
 	}
+	ft_putnbr((elem->origo_xy)[0]);
+	ft_putendl(" is origo x");
+	ft_putnbr((elem->origo_xy)[1]);
+	ft_putendl(" is origo y");
 }
 
 static int		neighbours(int i, char c, char *str)
@@ -67,6 +77,7 @@ static int		neighbours(int i, char c, char *str)
 
 int				validate_bloc(t_bloc *elem, t_temp *val)
 {
+	ft_putendl(elem->str);
 	while ((elem->str)[val->i])
 	{
 		if ((elem->str)[val->i] == '.')
@@ -91,5 +102,6 @@ int				validate_bloc(t_bloc *elem, t_temp *val)
 		bloc_origo(elem);
 		return (0);
 	}
+	exits();
 	return (1);
 }
