@@ -6,7 +6,7 @@
 #    By: npimenof <npimenof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/01 11:34:24 by npimenof          #+#    #+#              #
-#    Updated: 2019/11/07 13:47:18 by npimenof         ###   ########.fr        #
+#    Updated: 2019/11/07 13:53:27 by npimenof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ libftmake:
 all: libftmake
 	gcc $(FLAGS) -c $(SRCS1) $(INCL)
 	gcc $(FLAGS) $(INCL) $(OBJS) $(LIB) -o $(NAME)
-
 
 clean:
 	rm -f $(OBJS)
