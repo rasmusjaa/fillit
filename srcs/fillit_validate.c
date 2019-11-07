@@ -6,15 +6,18 @@
 /*   By: npimenof <npimenof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 12:07:05 by npimenof          #+#    #+#             */
-/*   Updated: 2019/11/06 17:32:56 by npimenof         ###   ########.fr       */
+/*   Updated: 2019/11/07 11:52:25 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void		exits(void)
+void			exitnow(int i)
 {
-	ft_putendl("error");
+	if (i == 1)
+		ft_putendl("error");
+	else
+		ft_putendl("usage: ./fillit [ input_file ]");
 	exit(1);
 }
 
@@ -40,15 +43,11 @@ static void		bloc_origo(t_bloc *elem)
 		(elem->y)[i] = (elem->y)[i] - (elem->origo_xy)[1];
 		i++;
 	}
-	ft_putnbr((elem->origo_xy)[0]);
-	ft_putendl(" is origo x");
-	ft_putnbr((elem->origo_xy)[1]);
-	ft_putendl(" is origo y");
 }
 
 static int		neighbours(int i, char c, char *str)
 {
-	int		total;
+	int			total;
 
 	total = 0;
 	if (i - 4 >= 0 && (str[i - 4] == '#' || str[i - 4] == c))
@@ -75,9 +74,8 @@ static int		neighbours(int i, char c, char *str)
 	return (total);
 }
 
-int				validate_bloc(t_bloc *elem, t_temp *val)
+void			validate_bloc(t_bloc *elem, t_temp *val)
 {
-	ft_putendl(elem->str);
 	while ((elem->str)[val->i])
 	{
 		if ((elem->str)[val->i] == '.')
@@ -86,7 +84,7 @@ int				validate_bloc(t_bloc *elem, t_temp *val)
 				neighbours(val->i, elem->c, elem->str) > 0)
 		{
 			if (val->j == 5)
-				return (1);
+				exitnow(1);
 			elem->x[val->j] = val->i % 4;
 			elem->y[val->j] = val->i / 4;
 			val->j++;
@@ -100,8 +98,7 @@ int				validate_bloc(t_bloc *elem, t_temp *val)
 	if (val->i == 16 && val->dot == 12 && val->hash1 == 4 && val->hash2 >= 1)
 	{
 		bloc_origo(elem);
-		return (0);
+		return ;
 	}
-	exits();
-	return (1);
+	exitnow(1);
 }

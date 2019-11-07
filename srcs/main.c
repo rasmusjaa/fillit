@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 10:26:36 by npimenof          #+#    #+#             */
-/*   Updated: 2019/11/06 16:58:38 by npimenof         ###   ########.fr       */
+/*   Updated: 2019/11/07 11:52:38 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_temp		*set_values(void)
 	return (val);
 }
 
-int			ft_blociter(t_bloc *lst, int (*f)(t_bloc *elem, t_temp *val))
+void		ft_blociter(t_bloc *lst, void (*f)(t_bloc *elem, t_temp *val))
 {
 	t_bloc	*tmp;
 	t_temp	*val;
@@ -56,7 +56,6 @@ int			ft_blociter(t_bloc *lst, int (*f)(t_bloc *elem, t_temp *val))
 			tmp = tmp->next;
 		}
 	}
-	return (0);
 }
 
 void		del_blocs(t_bloc **start)
@@ -74,12 +73,6 @@ void		del_blocs(t_bloc **start)
 	}
 }
 
-int			returns(char *str)
-{
-	ft_putendl(str);
-	return (1);
-}
-
 int			main(int ac, char **av)
 {
 	int		fd;
@@ -87,27 +80,23 @@ int			main(int ac, char **av)
 	char	*result;
 	int		blocs;
 
+	bloc_start = NULL;
 	if (ac == 2)
 	{
 		if ((fd = open(av[1], O_RDONLY)) < 0)
-			return (returns("error"));
-		else
-			create_list(fd, &bloc_start);
+			exitnow(1);
+		fd = read_input_file(av[1], fd);
+		create_list(fd, &bloc_start);
 		ft_blociter(bloc_start->next, validate_bloc);
-		ft_putendl("validated");
 		if ((blocs = count_blocs(bloc_start)) < 1 || blocs > 26)
-			return (returns("error"));
-		ft_putnbr(blocs);
-		ft_putendl(" blocks");
+			exitnow(1);
 		result = solve(blocs, bloc_start);
-		ft_putendl("solved");
 		del_blocs(&bloc_start);
 		ft_putstr(result);
 		free(result);
 		close(fd);
 	}
 	else
-		return (returns("usage: ./fillit [ input_file ]"));
-	// while (1);
+		exitnow(0);
 	return (0);
 }

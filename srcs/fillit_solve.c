@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 12:29:05 by npimenof          #+#    #+#             */
-/*   Updated: 2019/11/06 17:01:49 by npimenof         ###   ########.fr       */
+/*   Updated: 2019/11/07 11:47:36 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ char			*solve(int blocs, t_bloc *start)
 		grid = new_grid(min);
 		if (put_bloc(grid, start->next, min) == 0)
 			return (grid);
-		ft_putendl(grid);
 		free(grid);
 		grid = NULL;
 		min++;
